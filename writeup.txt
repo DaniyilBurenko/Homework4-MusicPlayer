@@ -1,0 +1,39 @@
+CISC 3130 - Music Player
+Data Structures and Big-O
+
+Part A: Big-O Table
+
+n = number of songs in the playlist  
+q = number of songs in Up Next  
+h = number of songs in History
+
+HashMap operations are O(1) on average.
+
+Method         Structures              Big-O       Reason
+--------------------------------------------------------------------------
+addSong        LinkedList, HashMap     O(1) avg    Add to list and map
+findSong       HashMap                 O(1) avg    Look up song by ID
+play           HashMap, ArrayDeque     O(1) avg    Find, save, update count
+queueLater     HashMap, ArrayDeque     O(1) avg    Add to back of queue
+queueNext      HashMap, ArrayDeque     O(1) avg    Add to front of queue
+next           LinkedList, ArrayDeque  O(n + q)    Skip queue or search list
+back           ArrayDeque, HashMap     O(h)        Skip removed history songs
+removeSong     LinkedList, HashMap     O(n)        Search list to remove song
+showPlaylist   LinkedList              O(n)        Go through every song
+
+Other methods:
+
+- nowPlaying: O(1)
+- playCount: O(1) average
+- showUpNext: O(q)
+- showHistory: O(h)
+
+Part B: Data Structure Choices
+
+1. Library - HashMap
+
+I used a HashMap for the library so I could find songs using their IDs. If I used an array instead, I would have to go through the songs until I found the right one, which could take O(n). A HashMap makes this faster since looking up a song is O(1) on average. I used Java's built-in HashMap because the assignment allows it.
+
+2. Up Next - ArrayDeque
+
+I chose ArrayDeque for Up Next because songs need to be added to both the front and back of the queue. It has addFirst and addLast, which are O(1) amortized. Using a regular array would make adding songs to the front slower because the other elements would need to move over, taking O(q). I used the built-in ArrayDeque instead of making my own because it already handles what I need.
